@@ -1,0 +1,33 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 350px;
+  flex-shrink: 0;
+  background: white;
+  overflow-y: auto;
+  height: 93vh;
+}
+.sidebar--hidden {
+  display: none;
+}
+.sidebar__closebtn {
+  margin: 20px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.sidebar__closebtn:hover {
+  color: red;
+}
+.sidebar__header {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  text-align: center;
+  background: #f2f5fa;
+}
+.sidebar__module {
+  overflow-y: auto;
+}
