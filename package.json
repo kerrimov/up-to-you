@@ -1,7 +1,7 @@
 {
   "name": "webpacktemplate",
   "version": "1.0.0",
-  "description": "My template",
+  "description": "up-to-you",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --mode development",
@@ -15,11 +15,17 @@
     "@babel/preset-typescript": "^7.3.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.0.0",
+    "file-loader": "^4.1.0",
+    "html-loader": "^0.5.5",
     "path": "^0.12.7",
     "prettier": "1.18.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "babel-plugin-transform-html-import-require-to-string": "0.0.3",
+    "babel-plugin-transform-html-import-to-string": "0.0.1"
   }
 }
