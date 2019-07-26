@@ -47,5 +47,8 @@ module.exports = {
   },
   devServer: {
     overlay: true
-  }
+  },
+	performance: {
+		hints: false,
+	}
 };
