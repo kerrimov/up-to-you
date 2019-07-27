@@ -21,6 +21,7 @@
 }
 .sidebar__closebtn:hover {
   color: red;
+  font-size: 50px
 }
 .sidebar__header {
   display: grid;
