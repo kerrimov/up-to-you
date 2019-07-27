@@ -8,6 +8,9 @@ body {
   flex-basis: 100vw;
   justify-content: space-between;
 }
+.flex {
+  display: flex;
+}
 .status-container {
   flex-basis: 100%;
   display: flex;
