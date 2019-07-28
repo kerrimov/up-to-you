@@ -13,5 +13,4 @@ card.mount(data);
 const module = new Module();
 module.mount(data);
 const scroll = new Scroll();
-scroll.scrolling()
-
+scroll.scrolling();

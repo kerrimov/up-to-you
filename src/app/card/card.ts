@@ -3,8 +3,8 @@ import card from "./card.html";
 var count = 0;
 export class Card {
   mount(data) {
-    data.then(response => {
-      let resLength = count+1;
+    data.then((response) => {
+      let resLength = count + 1;
       for (let i = count; i < resLength; i++) {
         const cardContainer = document.getElementById("card__container");
         cardContainer.innerHTML += `<div class="card" id="card">
