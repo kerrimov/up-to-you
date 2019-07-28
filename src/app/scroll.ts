@@ -1,16 +1,19 @@
- let listElm = document.querySelector('card__container');
-   let nextItem = 1;
-  function loadMore() {
-    for (var i = 0; i < 20; i++) {
-      var item = document.createElement('li');
-      item.innerText = 'Item ' + nextItem++;
-      listElm.appendChild(item);
-    }
-  }
-export function scrolling() {
-    listElm.addEventListener('scroll', function() {
-      if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-        loadMore()
+import { Module } from "./module/module";
+import { Card } from "./card/card";
+import { fetchAsync } from "../ts/data";
+const data = fetchAsync();
+
+export class Scroll {
+  scrolling(){
+    let listElem = document.getElementById('card__container')
+    listElem.addEventListener('scroll', function() {
+      if (listElem.scrollTop + listElem.clientHeight >= listElem.scrollHeight) {
+        console.log("tut");
+        const card = new Card();
+        card.mount(data);
+        const module = new Module();
+        module.mount(data);
       }
     });
   }
+}
