@@ -1,10 +1,17 @@
 import { App } from "../app/app";
-import { Card } from "../app/card/card";
-import { Module } from "../app/module/module";
-import { fetchAsync } from "./data";
-import { Render } from "./render";
+import { render } from "../app/main/render";
+import {scroll} from "../app/scroll";
 
 const app = new App();
 app.mount();
-const data = fetchAsync();
-Render(data);
+
+render("not_done" );
+render("in_progress");
+render("suspended");
+render("high_priority");
+render("rejected");
+
+
+// render(["not_done", "in_progress", "suspended", "high_priority", "rejected", "done"]);
+
+scroll("not_done");
