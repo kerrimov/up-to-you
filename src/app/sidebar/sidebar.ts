@@ -1,17 +1,20 @@
 import { Mountable } from "../interfaces/Mountable";
 // import sidebarTemplate from "./sidebar.html";
+import moduleTpl from "../card/module.html";
 
 export class Sidebar implements Mountable {
   private sidebar: HTMLElement;
-  private sidebarTemplate: Node;
+  private sidebarTemplateLiveNode: Node;
+  private moduleTemplateString: string;
   private closeButton: HTMLElement;
-  private openFlag: boolean;
+  private isOpen: boolean;
 
   constructor() {
     //sidebar has to be empty template of html for cloning everytime it needs to be filled
-    this.openFlag = false;
+    this.isOpen = false;
+    this.moduleTemplateString = moduleTpl;
     this.sidebar = document.getElementById("sidebar");
-    this.sidebarTemplate = this.sidebar.cloneNode(true);
+    this.sidebarTemplateLiveNode = this.sidebar.cloneNode(true);
     this.closeButton = document.getElementById("sidebar__closebtn");
   }
 
@@ -33,7 +36,7 @@ export class Sidebar implements Mountable {
     if (target.closest(".card")) {
       const cardName = target.closest(".card").querySelector("h4").innerText;
       this.showCard(cardName);
-    } else if (!this.openFlag) {
+    } else if (!this.isOpen) {
       return;
     } else this.close(evt);
   }
@@ -42,22 +45,23 @@ export class Sidebar implements Mountable {
     let target = evt.target;
 
     if (
-      //checking different options to ignore
+      //checking different options to ignore closing sidebar
       (target.closest(".sidebar") && !target.matches(".sidebar__closebtn")) ||
       target.matches(".card__container")
     ) {
       return;
     } else {
       this.sidebar.classList.add("sidebar--hidden");
-      this.openFlag = false;
+      this.isOpen = false;
     }
   }
 
   private showCard(name: string) {
+    this.sidebarTemplateLiveNode.
     this.findCard(name);
 
     this.sidebar.classList.remove("sidebar--hidden");
-    this.openFlag = true;
+    this.isOpen = true;
   }
 
   private findCard(cardName: string) {
