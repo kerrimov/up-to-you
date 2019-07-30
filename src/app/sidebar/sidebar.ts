@@ -1,35 +1,38 @@
 import { Mountable } from "../interfaces/Mountable";
 import { getData } from "../../ts/data";
-import sidebarTpl from "./sidebar.html";
-import moduleTpl from "../card/module.html";
+import sidebarTmpl from "./sidebar.html";
+import moduleTmpl from "../card/module.html";
 
 //don't forget includ utils directory from TS
 
-let URL: string = "http://localhost:8080/";
+let baseURI: string = "http://localhost:8080/";
 let path: string = "cards2.json";
-export function getHtmlNodeFromString(template: string) {
-  let element: HTMLElement = document.createElement("div");
-  element.innerHTML = template;
-  const chunkOfHtmlElements = element.firstElementChild.cloneNode(true);
+
+function getHtmlNodeFromString(templateHhtmlString: string) {
+  const serviceElement: HTMLElement = document.createElement("div");
+  serviceElement.innerHTML = templateHhtmlString;
+  const chunkOfHtmlElements = serviceElement.firstElementChild.cloneNode(true);
   return chunkOfHtmlElements;
 }
 
 export class Sidebar implements Mountable {
+  private sidebarTmplTag: HTMLElement;
   private sidebar: HTMLElement;
-  private sidebarTplNode: Node;
-  private moduleContTpl: Node;
-  private moduleSingleTpl: Node;
+  private sidebarTmplNode: Node;
+  private moduleContTmpl: Node;
+  private moduleSingleTmpl: Node;
   private closeButton: HTMLElement;
   private isOpen: boolean;
 
   constructor() {
+    // this.sidebarTmplTag = document.getElementById("tmpl-sidebar").content.cloneNode(true);//
     //sidebar has to be empty template of html for cloning everytime it needs to be filled
     this.isOpen = false;
-    this.sidebarTplNode = getHtmlNodeFromString(sidebarTpl);
-    this.moduleContTpl = getHtmlNodeFromString(moduleTpl);
-    this.moduleSingleTpl = this.moduleContTpl.firstChild;
+    this.sidebarTmplNode = getHtmlNodeFromString(sidebarTmpl);
+    this.moduleContTmpl = getHtmlNodeFromString(moduleTmpl);
+    this.moduleSingleTmpl = this.moduleContTmpl.firstChild;
     this.sidebar = document.getElementById("sidebar");
-    // this.sidebarTplNode = this.sidebar.cloneNode(true);
+    // this.sidebarTmplNode = this.sidebar.cloneNode(true);
     this.closeButton = document.getElementById("sidebar__closebtn");
   }
 
@@ -77,21 +80,24 @@ export class Sidebar implements Mountable {
   }
 
   private showCard(name: string, id?: number) {
-    this.findCard(name);
+    this.sidebarTmplTag = document.getElementById("tmpl-sidebar").content.cloneNode(true);
+    this.sidebarTmplTag.querySelector("h3").textContent = name;
+    this.sidebar.appendChild(this.sidebarTmplTag);
+    // this.findCard(name);
 
-    /*let sidebarHeader = this.sidebarTplNode.getRootNode().querySelector("h3");
+    /*let sidebarHeader = this.sidebarTmplNode.getRootNode().querySelector("h3");
     console.log(sidebarHeader);
     sidebarHeader.textContent = name;*/
 
-    this.sidebar.replaceWith(this.sidebarTplNode);
-    this.sidebar = document.querySelector(".sidebar"); //new sidebar
+    /*this.sidebar.replaceWith(this.sidebarTmplNode);
+    this.sidebar = document.querySelector(".sidebar");*/ //new sidebar
     this.sidebar.classList.remove("sidebar--hidden");
     this.isOpen = true;
   }
 
   private findCard(cardName: string, id?: number) {
     //should be id
-    let fullData = getData(URL, path);
+    let fullData = getData(baseURI, path);
     let course:{"modules": Array<object>};
     fullData.then(arr => {
         course = arr.find(courseObj => {
