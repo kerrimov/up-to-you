@@ -7,12 +7,7 @@
   margin: 7px;
   padding: 7px;
 }
-.card__container--not_done,
-.card__container--in_progress,
-.card__container--suspended,
-.card__container--high_priority,
-.card__container--rejected,
-.card__container--done {
+.card__container {
   overflow: auto;
   display: flex;
   flex-direction: column;
