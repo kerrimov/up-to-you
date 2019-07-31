@@ -5,8 +5,11 @@ import { Card } from "../app/card/card";
 import { Module } from "../app/module/module";
 import { Main } from "../app/main/main";
 import { infiniteScrollData} from "../app/scroll";
+import { Slice } from "../app/slice";
 
-const data = fetchAsync();
+const dataRender = fetchAsync().then(result => result.slice(0,2));
+
+
 const app = new App();
 app.mount();
 const main = new Main();
@@ -24,12 +27,14 @@ const statuses = [
   "rejected",
   "done"
 ];
+
 const render = new Render();
 statuses.forEach(status => {
- render.firstRender(status);
+ render.init(dataRender,status);
 });
 
 const infiniteScroll = new infiniteScrollData();
 statuses.forEach(status => {
-  infiniteScroll.render(status);
-})
+  infiniteScroll.render(new Slice().render(), status)
+});
+
