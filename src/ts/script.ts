@@ -1,16 +1,28 @@
 import { App } from "../app/app";
+import { render } from "./render";
+import { fetchAsync } from "./data";
 import { Card } from "../app/card/card";
 import { Module } from "../app/module/module";
-import { fetchAsync } from "./data";
-import { Render } from "./render";
+import { Main } from "../app/main/main";
 
 const data = fetchAsync();
 const app = new App();
 app.mount();
-const card = new Card();
-card.mount(data);
-const module = new Module();
-module.mount(data);
+const main = new Main();
+main.mount();
+// const card = new Card();
+// card.mount(data);
+// // const module = new Module();
+// // module.mount(data);
 
-Render(data);
-
+const statuses = [
+  "not_done",
+  "in_progress",
+  "suspended",
+  "high_priority",
+  "rejected",
+  "done"
+];
+statuses.forEach(status => {
+  render(status);
+});

@@ -5,13 +5,14 @@ export class Card {
   mount(data) {
     data.then(response => {
       response.forEach((item, i) => {
-        const [cardContainer] = document.getElementsByClassName(
-          "card__container"
-        );
-        cardContainer.innerHTML += card;
-        const cardHeader = document.getElementsByClassName("card__header__h4")[
+        const parser = new DOMParser();
+        const parsedStatus = parser.parseFromString(status, "text/html");
+        const cardContainer = parsedStatus.querySelectorAll(".card__container")[
           i
         ];
+        console.log(parsedStatus);
+        cardContainer.innerHTML += card;
+        const cardHeader = cardContainer.querySelector(".card__header__value");
         cardHeader.innerHTML += item.courseTitle;
       });
     });
