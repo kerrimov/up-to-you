@@ -8,7 +8,7 @@ export class CardModule implements Mountable {
         const statusHeader = Array.from(
           document.querySelectorAll(".status__header")
         );
-        statusHeader.map(heading =>
+        statusHeader.forEach(heading =>
           heading.insertAdjacentHTML("afterend", card_module_template)
         );
       },
