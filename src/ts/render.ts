@@ -1,12 +1,13 @@
 import card from "../app/card/card.html";
 import module from "../app/module/module.html";
 import { fetchAsync } from "./data";
+import { Slice } from "../app/slice";
 
 const data = fetchAsync();
 
 export class Render {
   firstRender(status) {
-    data.then(res=>res.slice(0,5)).then(objCourseArr => {
+    data.then(res=>res.slice(0,10)).then(objCourseArr => {
       objCourseArr.forEach(objCourse => {
         objCourse.modules.forEach(objModule => {
           if (objModule.moduleStatus.key == status) {
