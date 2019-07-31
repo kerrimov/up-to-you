@@ -25,7 +25,8 @@
   border-left: 8px solid #208abe;
   background: #e8e9ed;
   margin: 7px;
-  text-align: center;
+  padding-left: 0.5em;
+  text-align: left;
   border-radius: 5px;
 }
 .module:hover {
@@ -33,6 +34,7 @@
   background: lightgrey;
 }
 module__status {
-  color: #208abe;
+  color: #1b33be;
+  font-weight: bold;
   padding: 0 0.2em;
 }
