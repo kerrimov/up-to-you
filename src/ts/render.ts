@@ -12,9 +12,7 @@ export class Render {
             );
             cardContainer.innerHTML += card;
             const course = cardContainer.querySelector(".card:last-child");
-            const courseTitle = course.querySelector(
-              ".card__header__value"
-            );
+            const courseTitle = course.querySelector(".card__header__value");
             const moduleContainer = course.querySelector(".module__container");
             moduleContainer.innerHTML += module;
             const moduleTitle = moduleContainer.querySelector(".module__value");

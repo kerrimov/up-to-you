@@ -1,13 +1,14 @@
 import { App } from "../app/app";
-import { Render} from "./render";
+import { Render } from "./render";
 import { fetchAsync } from "./data";
 import { Card } from "../app/card/card";
 import { Module } from "../app/module/module";
 import { Main } from "../app/main/main";
 import { infiniteScrollData} from "../app/scroll";
 import { Slice } from "../app/slice";
+import { Sidebar } from "../app/sidebar/sidebar";
 
-const dataRender = fetchAsync().then(result => result.slice(0,2));
+const dataRender = fetchAsync().then(result => result.slice(0,5));
 
 
 const app = new App();
@@ -18,6 +19,8 @@ main.mount();
 // card.mount(data);
 // // const module = new Module();
 // // module.mount(data);
+const sidebar = new Sidebar();
+sidebar.mount();
 
 const statuses = [
   "not_done",
