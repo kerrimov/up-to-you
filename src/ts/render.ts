@@ -17,16 +17,11 @@ export function render(status) {
           const courseTitle = cardContainer.querySelectorAll(
             ".card__header__value"
           )[count];
-          const courseId = cardContainer.querySelectorAll(".card")[count];
-          const parser = new DOMParser();
-          const parsedCard = parser.parseFromString(card, "text/html");
-          const moduleContainer = parsedCard.querySelector(
-            ".module__container"
-          );
-          const parsedModule = parser.parseFromString(module, "text/html");
+          const course = cardContainer.querySelectorAll(".card")[count];
+          const moduleContainer = course.querySelector(".module__container");
           moduleContainer.innerHTML += module;
-          const moduleTitle = parsedModule.querySelector(".module__value"); //all
-          courseId.setAttribute("id", objCourse.guid);
+          const moduleTitle = moduleContainer.querySelector(".module__value");
+          course.setAttribute("id", objCourse.guid);
           courseTitle.textContent = objCourse.courseTitle;
           moduleTitle.textContent = objModule.moduleTitle;
           count++;

@@ -13,7 +13,7 @@ export class Card {
         console.log(parsedStatus);
         cardContainer.innerHTML += card;
         const cardHeader = cardContainer.querySelector(".card__header__value");
-        cardHeader.innerHTML += item.courseTitle;
+        cardHeader.textContent = item.courseTitle;
       });
     });
   }

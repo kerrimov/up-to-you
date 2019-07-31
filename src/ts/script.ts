@@ -23,6 +23,7 @@ const statuses = [
   "rejected",
   "done"
 ];
+
 statuses.forEach(status => {
   render(status);
 });
