@@ -4,27 +4,53 @@ import { fetchAsync } from "./data";
 
 const data = fetchAsync();
 
-export function render(status) {
-  data.then(objCourseArr => {
-    objCourseArr.forEach(objCourse => {
-      objCourse.modules.forEach(objModule => {
-        if (objModule.moduleStatus.key == status) {
-          let cardContainer = document.getElementById(
-            "card__container--" + status
-          );
-          cardContainer.innerHTML += card;
-          const course = cardContainer.querySelector(".card:last-child");
-          const courseTitle = course.querySelector(
-            ".card__header__value"
-          );
-          const moduleContainer = course.querySelector(".module__container");
-          moduleContainer.innerHTML += module;
-          const moduleTitle = moduleContainer.querySelector(".module__value");
-          course.setAttribute("id", objCourse.guid);
-          courseTitle.textContent = objCourse.courseTitle;
-          moduleTitle.textContent = objModule.moduleTitle;
-        }
+export class Render {
+  firstRender(status) {
+    data.then(res=>res.slice(0,5)).then(objCourseArr => {
+      objCourseArr.forEach(objCourse => {
+        objCourse.modules.forEach(objModule => {
+          if (objModule.moduleStatus.key == status) {
+            let cardContainer = document.getElementById(
+              "card__container--" + status
+            );
+            cardContainer.innerHTML += card;
+            const course = cardContainer.querySelector(".card:last-child");
+            const courseTitle = course.querySelector(
+              ".card__header__value"
+            );
+            const moduleContainer = course.querySelector(".module__container");
+            moduleContainer.innerHTML += module;
+            const moduleTitle = moduleContainer.querySelector(".module__value");
+            course.setAttribute("id", objCourse.guid);
+            courseTitle.textContent = objCourse.courseTitle;
+            moduleTitle.textContent = objModule.moduleTitle;
+          }
+        });
       });
     });
-  });
+  }
+  scrollRender(status) {
+    new Slice().render().then(objCourseArr => {
+      objCourseArr.forEach(objCourse => {
+        objCourse.modules.forEach(objModule => {
+          if (objModule.moduleStatus.key == status) {
+            let cardContainer = document.getElementById(
+              "card__container--" + status
+            );
+            cardContainer.innerHTML += card;
+            const course = cardContainer.querySelector(".card:last-child");
+            const courseTitle = course.querySelector(
+              ".card__header__value"
+            );
+            const moduleContainer = course.querySelector(".module__container");
+            moduleContainer.innerHTML += module;
+            const moduleTitle = moduleContainer.querySelector(".module__value");
+            course.setAttribute("id", objCourse.guid);
+            courseTitle.textContent = objCourse.courseTitle;
+            moduleTitle.textContent = objModule.moduleTitle;
+          }
+        });
+      });
+    });
+  }
 }
