@@ -32,3 +32,7 @@
   border-left: 7px solid #065177;
   background: lightgrey;
 }
+module__status {
+  color: #208abe;
+  padding: 0 0.2em;
+}
