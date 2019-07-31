@@ -102,9 +102,12 @@ export class Sidebar implements Mountable {
                                           <p></p>
                                           <p class="module__status"></p>
                                         </div>`;
-
-    //create new sidebar Fragment with wrapper
+    //create needed elements before async
     const sidebarFragment = createFragmentFromString(sidebarHtmlString);
+    const cardHeading = sidebarFragment.querySelector("h3");
+    const moduleContainerFrag = sidebarFragment.querySelector(
+      ".module__container"
+    );
 
     //create types
     type singleModule = {
@@ -129,85 +132,32 @@ export class Sidebar implements Mountable {
     let modules: arrayModules;
     let module: singleModule;
 
-    //create needed elements before async
-    const cardHeading = sidebarFragment.querySelector("h3");
-    //get module container
-    const moduleContainerFrag = sidebarFragment.querySelector(
-      ".module__container"
-    );
-    const moduleFrag = createFragmentFromString(moduleHtmlString);
-    const moduleNameFr = moduleFrag.querySelector("p");
-    const moduleStatusFr = moduleFrag.querySelector(".module__status");
-
     course = await allData.then(arr => {
       return arr.find(courseObj => {
         if (courseObj.guid === id){
           //fill Card Name in sidebarFragment
           cardHeading.textContent = courseObj.courseTitle;
-
-          /*//fill moduleContainer with quantity of modules (everytime will be executed to insert one module)
-          courseObj.modules.forEach(oneModule => {
-
-            moduleNameFr.textContent = oneModule.moduleTitle;
-            moduleStatusFr.textContent = oneModule.moduleStatus.displayName;
-
-            moduleContainerFrag.appendChild(moduleFrag);
-          });*/
-
           return true;
         }
       });
     });
-    debugger;
+
+    function sortModules(a:singleModule, b: singleModule):number{
+      return a.moduleStatus.key.localeCompare(b.moduleStatus.key);
+    };
     modules = course.modules;
-    modules.forEach( oneModule => {
+    modules
+      .sort(sortModules)
+      .forEach( oneModule => {
       //fill moduleContainer with quantity of modules (everytime will be executed to insert one module)
-
-        moduleNameFr.textContent = oneModule.moduleTitle;
-        moduleStatusFr.textContent = oneModule.moduleStatus.displayName;
-
-        moduleContainerFrag.appendChild(moduleFrag);
-        sidebarFragment.appendChild(moduleContainerFrag);
-    });
-          /*.then( course =>{
-      //fill moduleContainer with quantity of modules (everytime will be executed to insert one module)
-      course.modules.forEach(oneModule => {
-
-        moduleNameFr.textContent = oneModule.moduleTitle;
-        moduleStatusFr.textContent = oneModule.moduleStatus.displayName;
-
-        moduleContainerFrag.appendChild(moduleFrag);
-      });
-    });*/
-
-    //fill Card Name in sidebarFragment (in promise?)
-    /*const cardHeading = sidebarFragment.querySelector("h3");
-    cardHeading.textContent = course.courseTitle;*/
-
-    //get module container
-    /*const moduleContainerFrag = sidebarFragment.querySelector(
-      ".module__container"
-    );*/
-
-    //fill moduleContainer with quantity of modules (everytime will be executed to insert one module)
-    /* const moduleFrag = createFragmentFromString(moduleHtmlString);
-    const moduleNameFr = moduleFrag.querySelector("p");
-    const moduleStatusFr = moduleFrag.querySelector(".module__status");*/
-    /*moduleNameFr.textContent = "Module Name";
-    moduleStatusFr.textContent = "Module Status";*/
-    //append modules
-    /*moduleContainerFrag.appendChild(moduleFrag);*/
-
-    /*course.modules.forEach(oneModule => {
       const moduleFrag = createFragmentFromString(moduleHtmlString);
       const moduleNameFr = moduleFrag.querySelector("p");
       const moduleStatusFr = moduleFrag.querySelector(".module__status");
+        moduleNameFr.textContent = oneModule.moduleTitle;
+        moduleStatusFr.textContent = oneModule.moduleStatus.displayName;
 
-      moduleNameFr.textContent = oneModule.moduleTitle;
-      moduleStatusFr.textContent = oneModule.moduleStatus.displayName;
-
-      moduleContainerFrag.appendChild(moduleFrag);
-    });*/
+        moduleContainerFrag.appendChild(moduleFrag);
+    });
 
     //to remove previous insertion, but not first (first time will be ignored)
     if (this.oldSbContent) {
