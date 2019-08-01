@@ -38,6 +38,6 @@ statuses.forEach(status => {
 
 const infiniteScroll = new infiniteScrollData();
 statuses.forEach(status => {
-  infiniteScroll.render(new Slice().render(), status)
+  infiniteScroll.render(status);
 });
 
