@@ -5,7 +5,7 @@
   flex-shrink: 0;
   background: white;
   overflow-y: auto;
-  height: 93vh;
+  min-height: 100%;
 }
 .sidebar--hidden {
   display: none;
@@ -23,6 +23,8 @@
   color: red;
 }
 .sidebar__header {
+  position: sticky; /*to fixed heading!*/
+  top: 0;
   display: grid;
   grid-template-columns: 75% 25%;
   text-align: center;
@@ -30,4 +32,8 @@
 }
 .sidebar__module {
   overflow-y: auto;
+}
+.module__status {
+  color: blue;
+  font-style: italic;
 }
