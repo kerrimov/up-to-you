@@ -6,7 +6,7 @@ import { infiniteScrollData} from "../app/scroll";
 import { Slice } from "../app/slice";
 import { Sidebar } from "../app/sidebar/sidebar";
 
-const dataRender = fetchAsync().then(result => result.slice(0,5));
+const dataRender = fetchAsync().then(result => result.slice(0,10));
 
 
 const app = new App();

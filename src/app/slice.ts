@@ -1,7 +1,7 @@
 import { fetchAsync } from "../ts/data";
 
 const data = fetchAsync();
-let offset =  5;
+let offset =  10;
 export class Slice {
   render() {
     let step = 5;
