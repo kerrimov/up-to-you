@@ -2,7 +2,7 @@ import card from "../app/card/card.html";
 import module from "../app/module/module.html";
 
 export class Render {
-  init(data,status) {
+  init(data, status) {
     data.then(objCourseArr => {
       objCourseArr.forEach(objCourse => {
         objCourse.modules.forEach(objModule => {
@@ -23,5 +23,5 @@ export class Render {
         });
       });
     });
-  };
+  }
 }
